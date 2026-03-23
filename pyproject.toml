@@ -6,9 +6,9 @@ build-backend = "hatchling.build"
 name = "pelican-obsidian-callouts"
 version = "0.1.0"
 description = "Pelican plugin: render Obsidian-style callouts from Markdown blockquotes"
+authors = [{name = "Tom Clancy"}]
+license = {text = "MIT"}
 readme = "README.md"
-requires-python = ">=3.12"
-license = { text = "MIT" }
 keywords = ["pelican", "plugin", "obsidian", "callouts", "markdown"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -19,26 +19,40 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+requires-python = ">=3.10"
 dependencies = [
     "pelican>=4.5",
 ]
 
+[project.optional-dependencies]
+markdown = ["markdown>=3.4"]
+
 [project.urls]
-Homepage = "https://github.com/tclancy/pelican-obsidian-callouts"
-Repository = "https://github.com/tclancy/pelican-obsidian-callouts"
-Issues = "https://github.com/tclancy/pelican-obsidian-callouts/issues"
+"Homepage" = "https://github.com/tclancy/pelican-obsidian-callouts"
+"Issue Tracker" = "https://github.com/tclancy/pelican-obsidian-callouts/issues"
+"Changelog" = "https://github.com/tclancy/pelican-obsidian-callouts/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pelican"]
+packages = ["pelican"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/", "tests/", "README.md", "pyproject.toml"]
+include = ["pelican/", "CHANGELOG.md", "CONTRIBUTING.md", "README.md", "pyproject.toml"]
+
+[tool.autopub]
+project-name = "Obsidian Callouts"
+git-username = "botpub"
+git-email = "52496925+botpub@users.noreply.github.com"
+append-github-contributor = true
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["pelican/plugins/obsidian_callouts"]
 addopts = "--cov=pelican.plugins.obsidian_callouts --cov-report=term-missing"
 
 [tool.coverage.run]
@@ -48,13 +62,63 @@ source = ["pelican.plugins.obsidian_callouts"]
 line-length = 100
 
 [tool.ruff.lint]
-select = ["E", "F", "C90"]
+select = [
+  "B",   # flake8-bugbear
+  "BLE", # flake8-blind-except
+  "C4",  # flake8-comprehensions
+  "D",   # pydocstyle
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "I",   # isort
+  "ICN", # flake8-import-conventions
+  "ISC", # flake8-implicit-str-concat
+  "PGH", # pygrep-hooks
+  "PL",  # pylint
+  "RET", # flake8-return
+  "RUF", # ruff-specific rules
+  "SIM", # flake8-simplify
+  "T10", # flake8-debugger
+  "T20", # flake8-print
+  "TID", # flake8-tidy-imports
+  "TRY", # tryceratops
+  "UP",  # pyupgrade
+  "W",   # pycodestyle
+  "YTT", # flake8-2020
+]
+
+ignore = [
+  "D100",    # missing docstring in public module
+  "D104",    # missing docstring in public package
+  "D203",    # blank line before class docstring
+  "D213",    # multi-line docstring summary should start at the second line
+  "ISC001",  # disabled so `ruff format` works without warning
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-sort-within-sections = true
+known-first-party = ["pelican"]
 
 [dependency-groups]
+lint = [
+    "invoke>=2.2",
+    "ruff>=0.14.2,<1.0.0",
+]
+test = [
+    "invoke>=2.2",
+    "markdown>=3.4",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-sugar>=1.0",
+    "pelican[markdown]>=4.11.0",
+]
 dev = [
-    "pytest>=9.0.2",
-    "pytest-cov>=6.0.0",
-    "ruff>=0.11.0",
+    "invoke>=2.2",
     "pre-commit>=4.0.0",
+    "ruff>=0.14.2,<1.0.0",
+    "markdown>=3.4",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-sugar>=1.0",
     "pelican[markdown]>=4.11.0",
 ]

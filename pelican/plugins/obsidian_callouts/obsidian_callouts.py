@@ -45,8 +45,8 @@ CSS hooks:
 
 from __future__ import annotations
 
-import re
 from html import escape
+import re
 
 from pelican import signals
 from pelican.contents import Article, Page

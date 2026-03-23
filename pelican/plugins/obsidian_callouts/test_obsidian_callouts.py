@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from pelican.plugins.obsidian_callouts.obsidian_callouts import _process_html, _render_callout
 
-
 # ---------------------------------------------------------------------------
 # _render_callout
 # ---------------------------------------------------------------------------

@@ -163,7 +163,7 @@ def test_process_html_foldable_collapsed():
 def test_process_html_foldable_injects_js():
     """JS block must be present in the final output when there's a foldable."""
     raw = _bq("[!info]+\nInfo body.")
-    processed, had_foldable = _process_html(raw)
+    _, had_foldable = _process_html(raw)
     # Caller would inject JS if had_foldable is True
     assert had_foldable is True
 

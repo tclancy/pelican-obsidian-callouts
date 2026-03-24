@@ -94,6 +94,9 @@ ignore = [
   "ISC001",  # disabled so `ruff format` works without warning
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"**/test_*.py" = ["D103"]
+
 [tool.ruff.lint.isort]
 combine-as-imports = true
 force-sort-within-sections = true

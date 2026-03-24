@@ -214,4 +214,5 @@ def _on_content_object_init(content_obj) -> None:
 
 
 def register():
+    """Register the plugin with Pelican."""
     signals.content_object_init.connect(_on_content_object_init)

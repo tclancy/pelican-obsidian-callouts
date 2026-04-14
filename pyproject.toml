@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
 name = "pelican-obsidian-callouts"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Pelican plugin: render Obsidian-style callouts from Markdown blockquotes"
 authors = [{name = "Tom Clancy"}]
 license = {text = "MIT"}
@@ -38,6 +38,12 @@ markdown = ["markdown>=3.4"]
 "Homepage" = "https://github.com/tclancy/pelican-obsidian-callouts"
 "Issue Tracker" = "https://github.com/tclancy/pelican-obsidian-callouts/issues"
 "Changelog" = "https://github.com/tclancy/pelican-obsidian-callouts/blob/main/CHANGELOG.md"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "pelican/plugins/obsidian_callouts/_version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["pelican"]
